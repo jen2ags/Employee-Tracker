@@ -113,12 +113,13 @@ const updateEmployeeRole = () => {
         const employees = rows.map (({first_name, last_name, id}) => ({name: `${first_name} ${last_name}`, value: id}));
         inquirer.prompt([
             {
-                type:
-                name:
-                message:
-                choices
+                type:'list',
+                name:'employee',
+                message:'Which employee would you like to update?',
+                choices: employees
             }
         ])
+        //.then
     })
 }   
 
