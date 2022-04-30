@@ -1,4 +1,5 @@
-INSERT INTO department (department_name)
+USE company;
+INSERT INTO departments (name)
 VALUES 
     ('Engineering'), 
     ('Marketing'),  
@@ -6,7 +7,7 @@ VALUES
     ('Production'), 
     ('Sales');
 
-INSERT INTO role (title, salary, department_id)
+INSERT INTO roles (title, salary, department_id)
 VALUES 
     ('Entry Level Engineer', 100000, 1),
     ('Associate Engineer', 130000, 1),
@@ -24,16 +25,16 @@ VALUES
     ('Sales Account Manager', 95000, 5),
     ('VP of Sales', 130000, 5);
 
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
+INSERT INTO employees (first_name, last_name, role_id)
 VALUES
-    ('Aaron', 'Smith', 1, 3),
-    ('Jake', 'King', 2, 3),
-    ('Ashley', 'Miller', 3, NULL),
-    ('Amanda', 'Anderson', 5, 5),
-    ('Kevin', 'Hill', 6, Null),
-    ('Karen', 'Hooks', 9, Null),
-    ('Cheryl', 'Crow', 11, 8),
-    ('Manny', 'Moore', 12, NULL),
-    ('Mandy', 'Harbrough', 13, 10),
-    ('Corey', 'Alvarado', 15, NULL);
+    ('Aaron', 'Smith', 1),
+    ('Jake', 'King', 2),
+    ('Ashley', 'Miller', 3),
+    ('Amanda', 'Anderson', 5),
+    ('Kevin', 'Hill', 6),
+    ('Karen', 'Hooks', 9),
+    ('Cheryl', 'Crow', 11),
+    ('Manny', 'Moore', 12),
+    ('Mandy', 'Harbrough', 13),
+    ('Corey', 'Alvarado', 15);
 
