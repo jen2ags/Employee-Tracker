@@ -1,7 +1,27 @@
 const inquirer = require('inquirer');
-const connection = require('./db/connection');
 const consoleTable = require('console.table');
+const express = require('express');
 const db = require('./db/connection');
+const PORT = process.env.PORT || 3001;
+const app = express();
+
+//middleware
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
+
+app.use((req,res) => {
+    res.status(404).end();
+});
+
+db.connect(err => {
+    if (err)
+    throw err;
+    console.log('Database connected');
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+        startOptions();
+    });
+});
 
 
 const startOptions = () => {
@@ -23,7 +43,7 @@ const startOptions = () => {
         }
     ])
         .then((answers) => {
-            const selectedOption = answers.toDo;
+            const selectedOption = answers.options;
             if (selectedOption === 'View ALL employees') {
                 viewEmployees();
             };
@@ -86,6 +106,7 @@ const viewRoles = () => {
     if (err) {
     throw err;
     }
+    console.log('\n');
     console.table(rows);
     return startOptions();
     });
