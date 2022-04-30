@@ -13,7 +13,7 @@ VALUES
     ('Associate Engineer', 130000, 1),
     ('Senior Engineer', 175000, 1), 
     ('Marketing Designer', 90000, 2), 
-    ('Marketing Coordinator', 110,000, 2),
+    ('Marketing Coordinator', 110000, 2),
     ('Senior Marketing Designer', 125000, 2),
     ('Media Intern', 50000, 3), 
     ('Media Coordinator', 75000, 3),
