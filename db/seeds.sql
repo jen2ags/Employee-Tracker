@@ -1,30 +1,39 @@
 INSERT INTO department (department_name)
 VALUES 
     ('Engineering'), 
-    ('Marketing'), 
-    ('Design'), 
+    ('Marketing'),  
     ('Media'), 
     ('Production'), 
     ('Sales');
 
 INSERT INTO role (title, salary, department_id)
 VALUES 
-    ('President', 300000, 1), 
-    ('Designer', 90000, 2), 
-    ('Senior Designer', 125000, 2), 
-    ('Intern', 50000. 4);
+    ('Entry Level Engineer', 100000, 1),
+    ('Associate Engineer', 130000, 1),
+    ('Senior Engineer', 175000, 1), 
+    ('Marketing Designer', 90000, 2), 
+    ('Marketing Coordinator', 110,000, 2),
+    ('Senior Marketing Designer', 125000, 2),
+    ('Media Intern', 50000, 3), 
+    ('Media Coordinator', 75000, 3),
+    ('Media Director', 100000, 3),
+    ('Production Technician', 65000, 4),
+    ('Production Operator', 80000, 4),
+    ('Production Lead', 100000, 4),
+    ('Regional Sales Manager', 70000, 5),
+    ('Sales Account Manager', 95000, 5),
+    ('VP of Sales', 130000, 5);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
-    ('Aaron', 'Smith', 1, ),
-    (''),
-    (''),
-    (''),
-    (''),
-    (''),
-    (''),
-    (''),
-    (''),
-    ('');
+    ('Aaron', 'Smith', 1, 3),
+    ('Jake', 'King', 2, 3),
+    ('Ashley', 'Miller', 3, NULL),
+    ('Amanda', 'Anderson', 5, 5),
+    ('Kevin', 'Hill', 6, Null),
+    ('Karen', 'Hooks', 9, Null),
+    ('Cheryl', 'Crow', 11, 8),
+    ('Manny', 'Moore', 12, NULL),
+    ('Mandy', 'Harbrough', 13, 10),
+    ('Corey', 'Alvarado', 15, NULL);
 
-/* the seeds need to be completed
