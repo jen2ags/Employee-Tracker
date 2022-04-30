@@ -3,7 +3,7 @@ const connection = require('./config/connection');
 const consoleTable = require('console.table');
 
 
-prompt([
+inquirer.prompt([
     {
         type: 'list',
         name: 'start',
@@ -16,3 +16,4 @@ prompt([
     
 })
 
+//add the rest of the prompts
