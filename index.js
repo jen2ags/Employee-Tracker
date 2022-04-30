@@ -6,9 +6,9 @@ const consoleTable = require('console.table');
 inquirer.prompt([
     {
         type: 'list',
-        name: 'start',
-        message: 'Welcome to the Employee Tracker. Please select continue to start.',
-        choices: ['Start', 'Quit']
+        name: 'options',
+        message: 'Welcome to the Employee Tracker. Please select which option you would like.',
+        choices: ['View ALL employees.', 'View ALL roles.', 'View ALL departments.', 'Update employee role.', 'Add employee.', 'Add role.', 'Add department', 'Finished']
     },
 
 ])
