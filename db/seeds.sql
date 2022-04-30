@@ -32,9 +32,9 @@ VALUES
     ('Kevin', 'Hill', 6, NULL),
     ('Karen', 'Hooks', 9, NULL),
     ('Ashley', 'Miller', 3, NULL),
-    ('Aaron', 'Smith', 1, 3),
-    ('Jake', 'King', 2, 3),
-    ('Amanda', 'Anderson', 5, 6),
-    ('Cheryl', 'Crow', 11, 12),
-    ('Mandy', 'Harbrough', 13, 15);
+    ('Aaron', 'Smith', 1, 5),
+    ('Jake', 'King', 2, 5),
+    ('Amanda', 'Anderson', 5, 3),
+    ('Cheryl', 'Crow', 11, 2),
+    ('Mandy', 'Harbrough', 13, 1);
 
