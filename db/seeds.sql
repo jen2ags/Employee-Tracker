@@ -25,16 +25,16 @@ VALUES
     ('Sales Account Manager', 95000, 5),
     ('VP of Sales', 130000, 5);
 
-INSERT INTO employees (first_name, last_name, role_id)
+INSERT INTO employees (first_name, last_name, role_id, manager_id)
 VALUES
-    ('Aaron', 'Smith', 1),
-    ('Jake', 'King', 2),
-    ('Ashley', 'Miller', 3),
-    ('Amanda', 'Anderson', 5),
-    ('Kevin', 'Hill', 6),
-    ('Karen', 'Hooks', 9),
-    ('Cheryl', 'Crow', 11),
-    ('Manny', 'Moore', 12),
-    ('Mandy', 'Harbrough', 13),
-    ('Corey', 'Alvarado', 15);
+    ('Aaron', 'Smith', 1, 3),
+    ('Jake', 'King', 2, 3),
+    ('Ashley', 'Miller', 3, NULL),
+    ('Amanda', 'Anderson', 5, 6),
+    ('Kevin', 'Hill', 6, NULL),
+    ('Karen', 'Hooks', 9, NULL),
+    ('Cheryl', 'Crow', 11, 12),
+    ('Manny', 'Moore', 12, NULL),
+    ('Mandy', 'Harbrough', 13, 15),
+    ('Corey', 'Alvarado', 15, NULL);
 
