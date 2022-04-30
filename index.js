@@ -74,27 +74,79 @@ const viewEmployees = () => {
 };
 
 const viewRoles = () => {
+    const sql = `SELECT roles.id,
+                        roles.title,
+                        roles.salary,
+                        departments.name AS department,
+                        
+                FROM roles
+                LEFT JOIN departments ON roles.department_id = departments.id`;
 
-}
+    db.query(sql, (err, rows) => {
+    if (err) {
+    throw err;
+    }
+    console.table(rows);
+    return startOptions();
+    });
+};
 
 const viewDepartments = () => {
-
-}
+    const sql = `SELECT * FROM departments`;
+    
+    db.query(sql, (err,rows) => {
+    
+    if (err) {
+    throw err;
+    }
+    console.table(rows);
+    return startOptions();
+    });
+};
 
 const updateEmployeeRole = () => {
-
-}
+    const sql = `SELECT first_name, last_name, id FROM employees`
+    db.query(sql, (err, rows) => {
+        if(err) {
+            throw err;
+        }
+        const employees = rows.map (({first_name, last_name, id}) => ({name: `${first_name} ${last_name}`, value: id}));
+        inquirer.prompt([
+            {
+                type:
+                name:
+                message:
+                choices
+            }
+        ])
+    })
+}   
 
 const addEmployee = () => {
-
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: ''
+        }
+    ])
 }
 
 const addRole = () => {
-
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: ''
+        }
+    ])
 }
 
 const addDepartment = () => {
-
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: ''
+        }
+    ])
 }
 
 module.exports = startOptions;
