@@ -250,7 +250,7 @@ const addEmployee = () => {
                                 }
                             ])
                                 .then(managerResponse => {
-                                    const managers = managerResponse.managers;
+                                    const managers = managerResponse.manager;
                                     params.push(managers);
                                     const sql = `INSERT INTO employees (first_name, last_name, role_id, manager_id)
                                                 VALUES (?, ?, ?, ?)`;
