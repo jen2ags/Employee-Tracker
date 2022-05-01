@@ -268,7 +268,7 @@ const addEmployee = () => {
                     });
                 });
             };
-            //Questions: What role would you like to add?, What department will this role be in?,What is the salary of this role?
+            
             const addRole = () => {
                 
                 inquirer.prompt([
@@ -331,17 +331,39 @@ const addEmployee = () => {
                                 return viewRoles();
                             });
                         });
-                })
-            }
-            //Questions: What new department would you like to add?
+                    });
+                });
+            };
+            
             const addDepartment = () => {
                 inquirer.prompt([
                     {
                         type: 'input',
-                        name: ''
-                    }
+                        name: 'department',
+                        message: 'What department would you like to add to the company?',
+                        validate: departmentInput => {
+                            if (departmentInput) {
+                                return true;
+                            } else {
+                                console.log('Please enter a valid department name.');
+                                return false;
+                            };
+                        }
+                    },
                 ])
-            }
+                .then (departmentResponse => {
+                    const sql = `INSERT INTO departments (name)
+                    VALUES (?)`;
+                    
+                    const params = departmentResponse.name;
+                    db.query(sql, params, (err) => {
+                        if (err) {
+                            throw err;
+                        }
+                        console.log('The new department has beed added!');
+                        return viewDepartments();
+                    });
+                });
+            };
 
-            module.exports = startOptions;
-//add the rest of the prompts
+module.exports = startOptions;
