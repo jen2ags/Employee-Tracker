@@ -161,10 +161,10 @@ const updateEmployeeRole = () => {
                     const role = rolesResponse.role;
                     params.unshift(role);
                     const sql = `UPDATE employees
-                                SET role_id =?
+                                SET role_id = ?
                                 WHERE id = ?`
                     
-                    db.query(sql, (err,rows)=> {
+                    db.query(sql, params, (err)=> {
                         if (err) {
                             throw err;
                         }
