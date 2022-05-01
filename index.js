@@ -97,7 +97,7 @@ const viewRoles = () => {
     const sql = `SELECT roles.id,
                         roles.title,
                         roles.salary,
-                        departments.name AS department,
+                        departments.name AS department
                         
                 FROM roles
                 LEFT JOIN departments ON roles.department_id = departments.id`;
@@ -106,7 +106,6 @@ const viewRoles = () => {
     if (err) {
     throw err;
     }
-    console.log('\n');
     console.table(rows);
     return startOptions();
     });
@@ -140,9 +139,43 @@ const updateEmployeeRole = () => {
                 choices: employees
             }
         ])
-        //.then
-    })
-}   
+        .then(employeeResponse => {
+            const employee = employeeResponse.employee;
+            const params = [employee];
+            const sql = `SELECT title, id FROM roles`;
+
+            db.query(sql, (err,rows)=> {
+                if (err) {
+                    throw err;
+                }
+                const roles = rows.map (({title, id}) => ({name: title, value: id}));
+                inquirer.prompt([
+                    {
+                        type: 'list',
+                        name: 'role',
+                        message: 'What is the new role of this employee?',
+                        choices: roles
+                    }
+                ])
+                .then(rolesResponse => {
+                    const role = rolesResponse.role;
+                    params.unshift(role);
+                    const sql = `UPDATE employees
+                                SET role_id =?
+                                WHERE id = ?`
+                    
+                    db.query(sql, (err,rows)=> {
+                        if (err) {
+                            throw err;
+                        }
+                        console.log('Employee role has been updated!');
+                        return startOptions();
+                    });
+                });
+            });
+        });
+    });
+};   
 
 const addEmployee = () => {
     inquirer.prompt([
