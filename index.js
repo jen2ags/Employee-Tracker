@@ -176,7 +176,7 @@ const updateEmployeeRole = () => {
         });
     });
 };   
-
+//Questions: What is the Employee's first name?, What is the employee's last name?, what is the employee's role?
 const addEmployee = () => {
     inquirer.prompt([
         {
@@ -185,7 +185,7 @@ const addEmployee = () => {
         }
     ])
 }
-
+//Questions: What role would you like to add?, What department will this role be in?,What is the salary of this role?
 const addRole = () => {
     inquirer.prompt([
         {
@@ -194,7 +194,7 @@ const addRole = () => {
         }
     ])
 }
-
+//Questions: What new department would you like to add?
 const addDepartment = () => {
     inquirer.prompt([
         {
