@@ -181,9 +181,69 @@ const addEmployee = () => {
     inquirer.prompt([
         {
             type: 'input',
-            name: ''
-        }
+            name: 'firstName',
+            message: "What is the new employee's first name?",
+            validate: firstNameInput => {
+                if (firstNameInput) {
+                    return true;
+                } else {
+                    console.log('Please enter a valid name.');
+                    return false;
+                };
+            }
+        },
+        {
+            type:'input',
+            name: 'lastName',
+            message: "What is the new employee's last name?",
+            validate: lastNameInput => {
+                if (lastNameInput) {
+                    return true;
+                } else {
+                    console.log('Please enter a valid name.');
+                    return false;
+                };
+            }
+        },
+       
     ])
+    .then (answer => {
+        const params = [answer.firstName,answer.lastName];
+        const sql = `SELECT * FROM roles`;
+
+        db.query(sql, (err,rows) => {
+            if (err) {
+                throw err;
+            }
+            const roles =rows.map(({title, id}) => ({name: title, value: id}));
+            inquirer.prompt([
+                {
+                    type: 'list',
+                    name: 'role',
+                    message: "What is the new employee's role?",
+                    choices: roles
+                }
+            ])
+            .then (roleResponse => {
+                const role = roleResponse.role;
+                params.push(role);
+                const sql = `SELECT * FROM employees`;
+        
+                db.query(sql, (err,rows) => {
+                    if (err) {
+                        throw err;
+                    }
+                    const manager =rows.map(({first_name, last_name, id}) => ({name: `${first_name} ${last_name}`, value: id}));
+                    inquirer.prompt([
+                        {
+                            type: 'list',
+                            name: 'manager',
+                            message: "Who is the new employee's manager?",
+                            choices: manager
+                        }
+                    ])
+        })
+    })
 }
 //Questions: What role would you like to add?, What department will this role be in?,What is the salary of this role?
 const addRole = () => {
