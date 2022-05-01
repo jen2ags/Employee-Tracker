@@ -67,7 +67,7 @@ const startOptions = () => {
                 addDepartment();
             };
             if (selectedOption === 'Finished') {
-                process.finished();
+                process.exit();
             };
         })
 };
@@ -164,8 +164,8 @@ const updateEmployeeRole = () => {
                             const role = rolesResponse.role;
                             params.unshift(role);
                             const sql = `UPDATE employees
-                                SET role_id = ?
-                                WHERE id = ?`
+                                        SET role_id = ?
+                                        WHERE id = ?`
 
                             db.query(sql, params, (err) => {
                                 if (err) {
@@ -179,7 +179,7 @@ const updateEmployeeRole = () => {
             });
     });
 };
-//Questions: What is the Employee's first name?, What is the employee's last name?, what is the employee's role?
+
 const addEmployee = () => {
 
     inquirer.prompt([
@@ -253,7 +253,7 @@ const addEmployee = () => {
                                     const managers = managerResponse.managers;
                                     params.push(managers);
                                     const sql = `INSERT INTO employees (first_name, last_name, role_id, manager_id)
-                                    VALUES (?, ?, ?, ?)`;
+                                                VALUES (?, ?, ?, ?)`;
 
                                     db.query(sql, params, (err) => {
                                         if (err) {
@@ -321,7 +321,7 @@ const addEmployee = () => {
                             const departments = departmentResponse.departments;
                             params.push(departments);
                             const sql = `INSERT INTO roles (title, salary, department_id)
-                            VALUES (?, ?, ?)`;
+                                        VALUES (?, ?, ?)`;
 
                             db.query(sql, params, (err) => {
                                 if (err) {
@@ -356,7 +356,7 @@ const addEmployee = () => {
                     const sql = `INSERT INTO departments (name)
                                 VALUES (?)`;
                     
-                    const params = departmentResponse.name;
+                    const params = departmentResponse.department;
                     db.query(sql, params, (err) => {
                         if (err) {
                             throw err;
