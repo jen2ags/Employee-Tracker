@@ -10,10 +10,11 @@ The purpose of this application is to create a database with all of a companies 
 
 
 ## How it Works
-![Screencastify-employee-tracker]()
+![Screencastify-employee-tracker](https://github.com/jen2ags/Employee-Tracker/blob/main/assets/videos/Video%20Walkthrough%20Employee%20Tracker.webm)
 
 ## Screen Shot
-![Screenshot initial terminal questions]()
+![Screenshot initial terminal questions](https://github.com/jen2ags/Employee-Tracker/blob/main/assets/images/Employee%20Tracker%20Screenshot.png)
+
 ## Installation
 To install this application, run the following commands in the terminal:
  * npm install mysql2
