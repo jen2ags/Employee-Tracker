@@ -320,7 +320,7 @@ const addEmployee = () => {
                         .then(departmentResponse => {
                             const departments = departmentResponse.departments;
                             params.push(departments);
-                            const sql = `INSERT INTO roles (name, salary, department_id)
+                            const sql = `INSERT INTO roles (title, salary, department_id)
                             VALUES (?, ?, ?)`;
 
                             db.query(sql, params, (err) => {
@@ -336,7 +336,8 @@ const addEmployee = () => {
             };
             
             const addDepartment = () => {
-                inquirer.prompt([
+
+                return inquirer.prompt([
                     {
                         type: 'input',
                         name: 'department',
@@ -353,7 +354,7 @@ const addEmployee = () => {
                 ])
                 .then (departmentResponse => {
                     const sql = `INSERT INTO departments (name)
-                    VALUES (?)`;
+                                VALUES (?)`;
                     
                     const params = departmentResponse.name;
                     db.query(sql, params, (err) => {
