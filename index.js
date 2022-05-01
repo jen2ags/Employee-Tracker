@@ -25,6 +25,7 @@ db.connect(err => {
 
 
 const startOptions = () => {
+
     inquirer.prompt([
         {
             type: 'list',
@@ -131,6 +132,7 @@ const updateEmployeeRole = () => {
             throw err;
         }
         const employees = rows.map(({ first_name, last_name, id }) => ({ name: `${first_name} ${last_name}`, value: id }));
+
         inquirer.prompt([
             {
                 type: 'list',
@@ -149,6 +151,7 @@ const updateEmployeeRole = () => {
                         throw err;
                     }
                     const roles = rows.map(({ title, id }) => ({ name: title, value: id }));
+
                     inquirer.prompt([
                         {
                             type: 'list',
@@ -169,7 +172,7 @@ const updateEmployeeRole = () => {
                                     throw err;
                                 }
                                 console.log('Employee role has been updated!');
-                                return startOptions();
+                                return viewEmployees();
                             });
                         });
                 });
@@ -178,6 +181,7 @@ const updateEmployeeRole = () => {
 };
 //Questions: What is the Employee's first name?, What is the employee's last name?, what is the employee's role?
 const addEmployee = () => {
+
     inquirer.prompt([
         {
             type: 'input',
@@ -216,6 +220,7 @@ const addEmployee = () => {
                     throw err;
                 }
                 const roles = rows.map(({ title, id }) => ({ name: title, value: id }));
+
                 inquirer.prompt([
                     {
                         type: 'list',
@@ -234,6 +239,8 @@ const addEmployee = () => {
                                 throw err;
                             }
                             const manager = rows.map(({ first_name, last_name, id }) => ({ name: `${first_name} ${last_name}`, value: id }));
+                            manager.push({name: 'No manager', value: null});
+
                             inquirer.prompt([
                                 {
                                     type: 'list',
@@ -253,7 +260,7 @@ const addEmployee = () => {
                                             throw err;
                                         }
                                         console.log('Employee has been created!');
-                                        return startOptions();
+                                        return viewEmployees();
                                     });
                                 });
                             });
@@ -263,12 +270,68 @@ const addEmployee = () => {
             };
             //Questions: What role would you like to add?, What department will this role be in?,What is the salary of this role?
             const addRole = () => {
+                
                 inquirer.prompt([
                     {
                         type: 'input',
-                        name: ''
+                        name: 'role',
+                        message: "What is the new role in the company?",
+                        validate: roleInput => {
+                            if (roleInput) {
+                            return true;
+                        } else {
+                            console.log('Please enter a valid role.');
+                            return false;
+                            };
+                        }
+                    },
+                    {
+                        type: 'input',
+                        name: 'salary',
+                        message: "What is the salary of the new role?",
+                        validate: salaryInput => {
+                            if (salaryInput) {
+                            return true;
+                        } else {
+                            console.log('Please enter a valid salary.');
+                            return false;
+                            };
+                        }
                     }
                 ])
+                .then (response => {
+                    const params = [response.role, response.salary];
+                    const sql = `SELECT * FROM departments`;
+        
+                    db.query(sql, (err, rows) => {
+                        if (err) {
+                            throw err;
+                        }
+                        const departments = rows.map(({ name, id }) => ({ name: name, value: id }));
+        
+                        inquirer.prompt([
+                            {
+                                type: 'list',
+                                name: 'departments',
+                                message: "Which department will this new role be in?",
+                                choices: departments
+                            }
+                        ])
+                        .then(departmentResponse => {
+                            const departments = departmentResponse.departments;
+                            params.push(departments);
+                            const sql = `INSERT INTO roles (name, salary, department_id)
+                            VALUES (?, ?, ?)`;
+
+                            db.query(sql, params, (err) => {
+                                if (err) {
+                                    throw err;
+                                }
+                                console.log('A new role for the company has been created!');
+                                return viewRoles();
+                            });
+                        });
+                })
             }
             //Questions: What new department would you like to add?
             const addDepartment = () => {
